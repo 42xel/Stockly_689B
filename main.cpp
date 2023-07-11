@@ -1,72 +1,52 @@
 #include <iostream>       // std::cout
-#include <vector>         // std::vector
 
 using namespace std;
-
-class mycomparison
-{
-    int* sol;
-    public:
-    mycomparison(int* s)
-        {sol=s;}
-    bool operator() (const int& lhs, const int&rhs) const
-    {
-        return (sol[lhs]<sol[rhs]);
-    }
-};
 
 int main() {
     int n;
     cin >> n;
     
-    int * a = new int (n);
+    int * a = new int [n];
     for (int i = 0; i < n; ++i ) {
         cin >> a[i];
         a[i] --;
     }
 
-    int * solution = new int (n);
+    int * solution = new int [n];
     for (int i = 0; i < n; ++i ) {
         solution[i] = n + 1;
     }
     
-    std::vector<int> q (n);
-    std::vector<int>::iterator bot = q.begin();
-    std::vector<int>::iterator top = q.begin();
+    int * q = new int [n];
+    int bot = 0;
+    int top = 0;
 
     solution[0] = 0;
-    *bot = 0;
+    q[bot] = 0;
     ++top;
 
-    while (bot != q.end()){
-        if (*bot > 0)
+    while (bot != top){
+
+        if (q[bot] > 0)
         {
-            if (solution[*bot - 1] > solution[*bot] + 1){
-                solution[*bot - 1] = solution[*bot] + 1;
-                if (top != q.end()){
-                    *top = *bot - 1;
-                     ++top;
-                }
+            if (solution[q[bot] - 1] > solution[q[bot]] + 1){
+                solution[q[bot] - 1] = solution[q[bot]] + 1;
+                q[top++] = q[bot] - 1;
             }
         }
-        if (*bot < n-1)
+        if (q[bot] < n-1)
         {
-            if (solution[*bot + 1] > solution[*bot] + 1){
-                solution[*bot + 1] = solution[*bot] + 1;
-                if (top != q.end()){
-                    *top = *bot + 1;
-                     ++top;
-                }
+            if (solution[q[bot] + 1] > solution[q[bot]] + 1){
+                solution[q[bot] + 1] = solution[q[bot]] + 1;
+                q[top++] = q[bot] + 1;
             }
         }
         
-        if (solution[a[*bot]] > solution[*bot] + 1){
-            solution[a[*bot]] = solution[*bot] + 1;
-            if (top != q.end()){
-                *top = a[*bot];
-                 ++top;
-            }
+        if (solution[a[q[bot]]] > solution[q[bot]] + 1){
+            solution[a[q[bot]]] = solution[q[bot]] + 1;
+            q[top++] = a[q[bot]];
         }
+        
         ++bot;
     }
 
@@ -76,13 +56,3 @@ int main() {
     
     return 0;
 }
-
-/*
-
-5
-1 2 3 4 5
-
-
-7
-4 4 4 4 7 7 7
-*/
