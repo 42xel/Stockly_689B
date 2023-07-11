@@ -43,23 +43,29 @@ int main() {
         {
             if (solution[*bot - 1] > solution[*bot] + 1){
                 solution[*bot - 1] = solution[*bot] + 1;
-                *top = *bot - 1;
-                if (top != q.end()) ++top;
+                if (top != q.end()){
+                    *top = *bot - 1;
+                     ++top;
+                }
             }
         }
         if (*bot < n-1)
         {
             if (solution[*bot + 1] > solution[*bot] + 1){
                 solution[*bot + 1] = solution[*bot] + 1;
-                *top = *bot + 1;
-                if (top != q.end()) ++top;
+                if (top != q.end()){
+                    *top = *bot + 1;
+                     ++top;
+                }
             }
         }
         
         if (solution[a[*bot]] > solution[*bot] + 1){
             solution[a[*bot]] = solution[*bot] + 1;
-            *top = a[*bot];
-            if (top != q.end()) ++top;
+            if (top != q.end()){
+                *top = a[*bot];
+                 ++top;
+            }
         }
         ++bot;
     }
