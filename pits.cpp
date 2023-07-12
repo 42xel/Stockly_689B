@@ -10,8 +10,6 @@ Le dernier points découle du fait que les a_i sont croissants.
 Il est fort de conséquences. Par exemple, il permet de guarantir que a_1 est le premier minimum local.
 Plus généralement, cela permet de savoir que le prochain minimum local à partir de k ne dépend que des a_i pour i<=k
 
-
-
 */
 
 #include <iostream>
@@ -49,6 +47,8 @@ int main() {
 
     for (int i = 0; i < n; ){
         pair<const int, const int> currentMin {i, d};
+        //pair<const int, const int> nextMin ;
+        //pair<const int, const int> lastMin ;
         if (minima.empty()) {
             minima.push_back(currentMin);
         }
